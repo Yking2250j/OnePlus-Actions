@@ -12,6 +12,7 @@ on:
           - 'sm8450'
           - 'sm8475'
           - 'sm7675'
+          - 'sm8150'
         default: 'sm8650'
       FEIL:
         description: "手机型号"
@@ -19,6 +20,7 @@ on:
         type: choice
         options:
           - 'oneplus_12'
+          - 'omeplus_7t'
           - 'oneplus_ace3_pro'
           - 'oneplus_ace5'
           - 'oneplus_pad2'
@@ -43,6 +45,7 @@ on:
           - 'pineapple'
           - 'kalama'
           - 'waipio'
+          - 'msmnile'
         default: 'pineapple'
       ANDROID_VERSION:
         description: "内核安卓版本"
@@ -52,6 +55,7 @@ on:
           - 'android14'
           - 'android13'
           - 'android12'
+          - 'android10'
         default: 'android14'
       KERNEL_VERSION:
         description: "内核版本"
@@ -61,6 +65,7 @@ on:
           - '6.1'
           - '5.15'
           - '5.10'
+          - '4.19'
         default: '6.1'
         
 jobs:
@@ -138,7 +143,7 @@ jobs:
       - name: Set up SUSFS
         run: |
            cd kernel_workspace
-           git clone https://gitlab.com/simonpunk/susfs4ksu.git -b gki-${{ github.event.inputs.ANDROID_VERSION }}-${{ github.event.inputs.KERNEL_VERSION }}
+           git clone https://gitlab.com/simonpunk/susfs4ksu.git -b kernel-${{ github.event.inputs.KERNEL_VERSION }}
            git clone https://github.com/Xiaomichael/kernel_patches.git
            cd kernel_platform
            cp ../susfs4ksu/kernel_patches/50_add_susfs_in_gki-${{ github.event.inputs.ANDROID_VERSION }}-${{ github.event.inputs.KERNEL_VERSION }}.patch ./common/
